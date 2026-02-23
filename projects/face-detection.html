@@ -1,0 +1,122 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Video Face Detection – Privacy-First Anonymization</title>
+  <meta content="Automated video face detection and age-based blurring for privacy protection" name="description">
+  <meta content="AI, Computer Vision, Privacy, MTCNN, DeepFace, Python, CUDA" name="keywords">
+
+  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="../assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+  <style>
+    .portfolio-featured-image {
+      max-width: 450px;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .tech-highlight {
+      color: #12d640;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main id="main">
+    <div id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-12 portfolio-info">
+            <br>
+            <h2 style="color:#12d640">🎥 Video Face Detection & Age-Based Anonymization</h2>
+            <ul>
+              <li><strong>Core Tech</strong>: Python, MTCNN (FaceNet-PyTorch), DeepFace, OpenCV, CUDA</li>
+              <li><strong>Functionality</strong>: Automated Face Detection & Selective Age-Based Blurring</li>
+            </ul>
+
+            <p>
+              Developed a specialized <strong>Privacy Protection</strong> tool that processes video files frame by frame to identify and anonymize sensitive content. The system utilizes a dual-model pipeline to ensure high accuracy in both detection and attribute analysis.
+            </p>
+            <p>
+              The application integrates <strong>MTCNN</strong> for robust face detection and <strong>DeepFace</strong> for real-time age estimation. By implementing a configurable <strong>CHILD_AGE_THRESHOLD</strong>, the tool automatically applies a Gaussian blur to individuals predicted to be below the specified age, ensuring digital privacy compliance.
+            </p>
+            <p>
+              Optimized for performance, the script features <strong>CUDA acceleration</strong> for GPU-enabled systems while maintaining graceful error handling to ensure continuous processing even during complex detection failures.
+            </p>
+
+            <br>
+            <h4 style="color:#12d640">Technical Workflow</h4>
+            <div class="row" style="margin-top: 20px;">
+              <div class="col-md-6">
+                <ul>
+                  <li><span class="tech-highlight">Face Detection:</span> Precise localization using MTCNN landmarks.</li>
+                  <li><span class="tech-highlight">Age Estimation:</span> Biological age prediction via DeepFace neural networks.</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <ul>
+                  <li><span class="tech-highlight">Privacy Guard:</span> Conditional blurring based on age thresholds.</li>
+                  <li><span class="tech-highlight">Output:</span> Real-time console progress and final MP4 reconstruction.</li>
+                </ul>
+              </div>
+            </div>
+
+            <br>
+            <h4 style="color:#12d640">App Demo</h4>
+            <div class="video-responsive" style="margin-top: 20px;">
+              <iframe 
+                  width="100%" 
+                  height="500" 
+                  src="https://www.youtube.com/shorts/9AeG4a7mV38" 
+                  title="Video Face Detection Demo - Input" 
+                  frameborder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen>
+              </iframe>
+            </div>
+
+            <div class="video-responsive" style="margin-top: 20px;">
+              <iframe 
+                  width="100%" 
+                  height="500" 
+                  src="https://www.youtube.com/shorts/pbauoC6d6Q8" 
+                  title="Video Face Detection Demo - Output" 
+                  frameborder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="../assets/vendor/jquery/jquery.min.js"></script>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="../assets/vendor/venobox/venobox.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+</body>
+</html>
