@@ -50,33 +50,43 @@
     document.addEventListener("DOMContentLoaded", function () {
 
         let hash = window.location.hash.substring(1);
-
         if (!hash) return;
 
-        // Map hash → project link selector
         const projectMap = {
-            "flappyBird": "a[data-project='flappyBird']",
-            "regexPattern": "a[data-project='regexPattern']",
-            "face-detection": "a[data-project='face-detection']",
-            "livewell": "a[data-project='livewell']"
+            "flappyBird": "projects/flappyBird.html",
+            "regexPattern": "projects/regexPattern.html",
+            "face-detection": "projects/face-detection.html",
+            "livewell": "projects/livewell.html"
         };
 
-        let projectSelector = projectMap[hash];
+        let projectUrl = projectMap[hash];
 
-        if(projectSelector){
+        if(projectUrl){
 
-            // Open Portfolio Section
-            document.querySelector('a[href="#portfolio"]').click();
+            // Open portfolio section first
+            let portfolioTab = document.querySelector('a[href="#portfolio"]');
+            if(portfolioTab){
+                portfolioTab.click();
+            }
 
+            // Wait for portfolio + plugins to load
             setTimeout(() => {
 
-                let projectLink = document.querySelector(projectSelector);
+                let projectLink = document.querySelector(
+                    `a[href="${projectUrl}"]`
+                );
 
                 if(projectLink){
-                    projectLink.click();
+                    projectLink.dispatchEvent(
+                        new MouseEvent("click", {
+                            bubbles: true,
+                            cancelable: true,
+                            view: window
+                        })
+                    );
                 }
 
-            }, 800);
+            }, 1200);
 
         }
 
