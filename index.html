@@ -46,6 +46,43 @@
     gtag('config', 'UA-169007209-3');
   </script>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        let hash = window.location.hash.substring(1);
+
+        if (!hash) return;
+
+        // Map hash → project link selector
+        const projectMap = {
+            "flappyBird": "a[data-project='flappyBird']",
+            "regexPattern": "a[data-project='regexPattern']",
+            "face-detection": "a[data-project='face-detection']",
+            "livewell": "a[data-project='livewell']"
+        };
+
+        let projectSelector = projectMap[hash];
+
+        if(projectSelector){
+
+            // Open Portfolio Section
+            document.querySelector('a[href="#portfolio"]').click();
+
+            setTimeout(() => {
+
+                let projectLink = document.querySelector(projectSelector);
+
+                if(projectLink){
+                    projectLink.click();
+                }
+
+            }, 800);
+
+        }
+
+    });
+  </script>
+
 
 
   <!-- =======================================================
