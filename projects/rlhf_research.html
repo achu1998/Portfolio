@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>RLHF Implementation Study – AI Research</title>
+  <meta content="Human-Aligned Text Generation with Small Language Models using SFT, Reward Models, and PPO Optimisation" name="description">
+  <meta content="RLHF, PPO, Reward Modeling, SFT, Small Language Models, SmolLM, LoRA, Machine Learning" name="keywords">
+
+  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="../assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+  <style>
+    .portfolio-featured-image {
+      max-width: 650px;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .section-title-alt {
+      color: #12d640;
+      margin-top: 30px;
+      border-bottom: 2px solid #12d640;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    .metric-card {
+      background: transparent;
+      border-left: 4px solid #12d640;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+    }
+    .table-custom {
+      margin-top: 15px;
+      margin-bottom: 25px;
+      color: #ffffff !important;
+    }
+    .table-custom th,
+    .table-custom td {
+      color: #ffffff !important;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main id="main">
+    <div id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-12 portfolio-info">
+            <br>
+            <h2 style="color:#12d640">Project: Human-Aligned Text Generation with Small Language Models (RLHF Pipeline)</h2>
+            <ul>
+              <li><strong>Author</strong>: Ashween Ramakrishnan (A1866320)</li>
+              <li><strong>Supervisor</strong>: Dr. Orvila Sarker, Adelaide University</li>
+              <li><strong>Core Tech</strong>: Python, PyTorch, Hugging Face TRL/Transformers, LoRA, SmolLM2, Qwen2.5, PPO, Reward Modeling</li>
+              <li><strong>Project Type</strong>: Reinforcement Learning from Human Feedback (RLHF) Research</li>
+            </ul>
+
+            <p>
+              This project implements an end-to-end <strong>Reinforcement Learning from Human Feedback (RLHF)</strong> training pipeline tailored for lower-parameter <strong>Small Language Models (SLMs)</strong>. By leveraging Supervised Fine-Tuning (SFT), Reward Modeling (RM), and Proximal Policy Optimization (PPO), the study demonstrates how resource-constrained environments can align language models to human preferences while avoiding hallucinations, safety violations, and policy drift.
+            </p>
+
+            <h4 class="section-title-alt">3-Phase Architecture & Pipeline Workflow</h4>
+            <ol>
+              <li><strong>Phase 1: Supervised Fine-Tuning (SFT)</strong> — Evaluated Qwen2.5-0.5B, SmolLM2-1.7B, and TinyLlama-1.1B on the Databricks Dolly-15k dataset using LoRA. SmolLM2-1.7B emerged as the optimal policy base with superior BLEU (0.0338) and ROUGE-L (0.2002) scores.</li>
+              <li><strong>Phase 2: Reward Modeling (RM)</strong> — Trained separate sequence classification reward models on human preference datasets (Full-HH-RLHF, RM-static, Synthetic-GPTJ-Pairwise) using binary cross-entropy loss.</li>
+              <li><strong>Phase 3: PPO Fine-Tuning</strong> — Updated the SFT policy via PPO with KL divergence penalties (KL=0.05) to ensure policy stability without deviating from the reference model.</li>
+            </ol>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="metric-card">
+                  <h5>SFT Baseline Selection</h5>
+                  <ul>
+                    <li><strong>Best Base Model</strong>: SmolLM2-1.7B-Instruct</li>
+                    <li><strong>ROUGE-L Score</strong>: 0.200184 (vs 0.146 Qwen / 0.110 TinyLlama)</li>
+                    <li><strong>BLEU Score</strong>: 0.033784</li>
+                    <li><strong>Hyperparameters</strong>: Ir=2e-4, max_len=256, LoRA r=8</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="metric-card">
+                  <h5>PPO Alignment & Safety Outcomes</h5>
+                  <ul>
+                    <li><strong>Optimal Pipeline</strong>: SmolLM + RM-static + PPO</li>
+                    <li><strong>Reward Score Gain</strong>: Increased from 24.25 to 41.25 (+17.0 reward jump)</li>
+                    <li><strong>KL Divergence</strong>: Controlled stability (0.2320 &rarr; 0.0926)</li>
+                    <li><strong>Safety Guardrails</strong>: Preserved strict refusal on malicious queries</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <h4 class="section-title-alt">SFT Model Performance Comparison</h4>
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-custom">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Model</th>
+                    <th>Parameters</th>
+                    <th>BLEU</th>
+                    <th>ROUGE-L</th>
+                    <th>Avg Length (Tokens)</th>
+                    <th>Key Characteristics</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Qwen2.5-0.5B-Instruct</strong></td>
+                    <td>0.5B</td>
+                    <td>0.015754</td>
+                    <td>0.146260</td>
+                    <td>57.1</td>
+                    <td>Lowest loss (1.0 final), highly concise, lower capacity.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>SmolLM2-1.7B-Instruct</strong></td>
+                    <td>1.7B</td>
+                    <td><strong>0.033784</strong></td>
+                    <td><strong>0.200184</strong></td>
+                    <td>70.9</td>
+                    <td><strong>Selected Best Policy:</strong> Superior coherence & explanation quality.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>TinyLlama-1.1B-Chat-v1.0</strong></td>
+                    <td>1.1B</td>
+                    <td>0.007987</td>
+                    <td>0.110637</td>
+                    <td>87.1</td>
+                    <td>Chat-tuned, verbose output, higher loss instability (2.5 &rarr; 1.8).</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h4 class="section-title-alt">Key Research Takeaways</h4>
+            <ul>
+              <li><strong>Reward Loss Paradox</strong>: Models with the lowest loss during reward training (e.g., Synthetic-GPTJ) do not necessarily yield the best PPO optimization. Stable preference boundaries matter more than raw reward accuracy.</li>
+              <li><strong>Structured Formatting</strong>: Manual output comparison proved that PPO alignment significantly improved code block formatting, helpfulness, and directness over standard SFT.</li>
+              <li><strong>Low-Compute Feasibility</strong>: Validated that SLMs combined with LoRA parameter-efficient tuning make high-quality RLHF accessible without requiring multi-GPU enterprise infrastructure.</li>
+            </ul>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="../assets/vendor/jquery/jquery.min.js"></script>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="../assets/vendor/venobox/venobox.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>MITRE ATT&CK RAG System – Cybersecurity AI Research</title>
+  <meta content="Retrieval-Augmented Generation for Cybersecurity Practitioner Guidelines Using MITRE ATT&CK Enterprise Framework" name="description">
+  <meta content="RAG, Cybersecurity, MITRE ATT&CK, Mistral-7B, ChromaDB, RAGAS, Dense Retrieval, Sentence Transformers" name="keywords">
+
+  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="../assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+  <style>
+    .portfolio-featured-image {
+      max-width: 650px;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .section-title-alt {
+      color: #12d640;
+      margin-top: 30px;
+      border-bottom: 2px solid #12d640;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    .metric-card {
+      background: transparent;
+      border-left: 4px solid #12d640;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+    }
+    .table-custom {
+      margin-top: 15px;
+      margin-bottom: 25px;
+      color: #ffffff !important;
+    }
+    .table-custom th,
+    .table-custom td {
+      color: #ffffff !important;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main id="main">
+    <div id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-12 portfolio-info">
+            <br>
+            <h2 style="color:#12d640">Project: Retrieval-Augmented Generation (RAG) for MITRE ATT&CK Cybersecurity Guidelines</h2>
+            <ul>
+              <li><strong>Author</strong>: Ashween Ramakrishnan (A1866320)</li>
+              <li><strong>Supervisor</strong>: Dr. Orvila Sarker, Adelaide University</li>
+              <li><strong>Core Tech</strong>: Python, Mistral-7B-Instruct (4-bit NF4), ChromaDB, LangChain, Sentence-Transformers (all-MiniLM-L6-v2), RAGAS Framework</li>
+              <li><strong>Project Type</strong>: Cybersecurity AI & Natural Language Processing Research</li>
+            </ul>
+
+            <p>
+              This project implements an end-to-end <strong>Retrieval-Augmented Generation (RAG)</strong> pipeline designed to deliver actionable, grounded cybersecurity incident response guidelines. By scraping the complete <strong>MITRE ATT&CK Enterprise Framework</strong> (697 techniques), the system indexes TTPs into ChromaDB and conditions a quantized Mistral-7B model to mitigate LLM hallucinations during threat analysis.
+            </p>
+
+            <h4 class="section-title-alt">RAG Pipeline Architecture</h4>
+            <ol>
+              <li><strong>Data Ingestion & Extraction</strong>: Direct web scraping of <code>attack.mitre.org</code> extracting 697 enterprise techniques, sub-techniques, detection methods, and mitigation mappings.</li>
+              <li><strong>Indexing & Vector Storage</strong>: Segmented text into sliding word windows (400 words, 50-word overlap) and generated 384-dimensional dense vectors via <code>all-MiniLM-L6-v2</code> stored in ChromaDB.</li>
+              <li><strong>Dense Semantic Retrieval</strong>: Query encoder performs cosine similarity Approximate Nearest Neighbor (ANN) search to retrieve top-k (k=3) relevant context chunks.</li>
+              <li><strong>Quantized Generation & UI</strong>: 4-bit NF4 quantized Mistral-7B-Instruct produces structured 3-point recommendations traceable back to explicit MITRE Technique IDs.</li>
+            </ol>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="metric-card">
+                  <h5>Retrieval & Grounding Metrics</h5>
+                  <ul>
+                    <li><strong>Faithfulness Score (Proxy)</strong>: 0.816 (High context grounding)</li>
+                    <li><strong>BERTScore F1</strong>: 0.790 (Strong lexical alignment)</li>
+                    <li><strong>Hallucination Rate</strong>: 0.184 (Only 18.4% unsupported claims)</li>
+                    <li><strong>Answer Relevancy (RAGAS)</strong>: 0.674</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="metric-card">
+                  <h5>System Configuration & Constraints</h5>
+                  <ul>
+                    <li><strong>Embedding Model</strong>: all-MiniLM-L6-v2 (384-dim)</li>
+                    <li><strong>LLM Generator</strong>: Mistral-7B-Instruct-v0.3 (4-bit NF4)</li>
+                    <li><strong>Vector Store</strong>: ChromaDB (Cosine similarity)</li>
+                    <li><strong>Chunk Window</strong>: 400 words / 50 overlap</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <h4 class="section-title-alt">Evaluation Metric Breakdown</h4>
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-custom">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Metric</th>
+                    <th>Score / Rate</th>
+                    <th>Meaning & Findings</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Faithfulness (Proxy)</strong></td>
+                    <td><strong>0.816</strong></td>
+                    <td>High percentage of generated assertions are explicitly supported by retrieved MITRE chunks rather than parametric memory.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>BERTScore F1</strong></td>
+                    <td><strong>0.790</strong></td>
+                    <td>Uniformly high token-level similarity across queries, proving high usage of domain vocabulary.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Answer Relevancy</strong></td>
+                    <td><strong>0.674</strong></td>
+                    <td>Moderate semantic relevance; indicates the model occasionally provides general advice alongside specific query context.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Context Precision</strong></td>
+                    <td><strong>0.562</strong></td>
+                    <td>Measures retrieval usefulness; highlighted that fixed chunking can miss specific technical sub-technique details.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Hallucination Rate</strong></td>
+                    <td><strong>0.184</strong></td>
+                    <td>Only 18.4% of generated sentences lacked direct context backing, exhibiting binary commitment behavior.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Chatbot Demo Showcase -->
+            <h4 class="section-title-alt">RAG Interactive Chatbot Demo</h4>
+            <p>
+              The system features an interactive query interface built with ipywidgets, providing real-time cybersecurity guidance backed by source attribution:
+            </p>
+
+            <div class="col-lg-12 text-center" style="margin-top: 20px; margin-bottom: 30px;">
+              <img src="../assets/img/project/RAG-chatbot.png" class="portfolio-featured-image" style="max-width: 100%; border: 1px solid #333;" alt="MITRE ATT&CK RAG Chatbot UI">
+              <p style="color: #cccccc; font-size: 14px; margin-top: 10px; font-style: italic;">
+                <strong>Figure 1:</strong> Interactive MITRE ATT&CK RAG Chatbot interface demonstrating query execution, structured recommendations, and retrieved source attribution with similarity scores.
+              </p>
+            </div>
+
+            <h4 class="section-title-alt">Key Research Insights</h4>
+            <ul>
+              <li><strong>The Lexical Paradox</strong>: The evaluation proved that high lexical overlap (BERTScore ~0.79) does not automatically guarantee semantic grounding (Faithfulness), underscoring the critical need for multi-metric frameworks like RAGAS.</li>
+              <li><strong>Zero-Retraining Updates</strong>: Demonstrates the primary enterprise advantage of RAG: security knowledge bases can be updated in real time via scraping without costly LLM retraining.</li>
+              <li><strong>Consumer Hardware Deployment</strong>: Utilizing 4-bit NF4 quantization enabled full execution on standard GPU infrastructure (Google Colab T4/A100) with low latency.</li>
+            </ul>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="../assets/vendor/jquery/jquery.min.js"></script>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="../assets/vendor/venobox/venobox.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+</body>
+</html>
