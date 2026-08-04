@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Smart Contract Reentrancy Vulnerability Detection – AI Research</title>
+  <meta content="Enhanced Detection of Reentrancy Vulnerabilities in Smart Contracts Using Integrated AI Approaches" name="description">
+  <meta content="Smart Contracts, Reentrancy Vulnerability, Machine Learning, Large Language Models, Blockchain Security, CyberLab" name="keywords">
+
+  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="../assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+  <style>
+    .portfolio-featured-image {
+      max-width: 600px;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .section-title-alt {
+      color: #12d640;
+      margin-top: 30px;
+      border-bottom: 2px solid #12d640;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    .metric-card {
+      background: #f8f9fa;
+      border-left: 4px solid #12d640;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+    }
+    .table-custom {
+      margin-top: 15px;
+      margin-bottom: 25px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main id="main">
+    <div id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-12 portfolio-info">
+            <br>
+            <h2 style="color:#12d640">Project: Enhanced Detection of Reentrancy Vulnerabilities in Smart Contracts Using Integrated AI Approaches</h2>
+            <ul>
+              <li><strong>Author</strong>: Ashween Ramakrishnan (A1866320)</li>
+              <li><strong>Supervisors</strong>: Dr. Ningran Li, Dr. Olaf Maennel</li>
+              <li><strong>Core Tech</strong>: Python, Solidity, PyTorch, Transformers (CodeBERT, CodeLlama, DeepSeek), Scikit-Learn, LoRA, Docker, Ansible</li>
+              <li><strong>Project Type</strong>: Master's Research Thesis (Semester 1 & Semester 2)</li>
+            </ul>
+
+            <p>
+              <strong>Reentrancy attacks</strong> remain the most severe security risk to smart contract ecosystems, causing substantial financial losses exceeding hundreds of millions of dollars in decentralized finance (DeFi) networks. Reentrancy occurs when a contract allows an external call prior to updating its internal state, enabling attackers to repeatedly withdraw funds or manipulate execution logic recursively.
+            </p>
+
+            <p>
+              This research develops an integrated vulnerability detection architecture transition from traditional ensemble machine learning models to fine-tuned Large Language Models (LLMs) and containerized deployment platforms.
+            </p>
+
+            <div style="background: rgba(18, 214, 64, 0.08); border-left: 4px solid #12d640; padding: 15px 20px; border-radius: 4px; margin: 20px 0;">
+            <p style="margin: 0; color: #ffffff;">
+                <strong>Platform Integration:</strong> This vulnerability detection tool has been successfully deployed and integrated into the 
+                <a href="https://maennel.ai/cyberlab/" target="_blank" style="color: #12d640; font-weight: 600; text-decoration: underline;">CyberLab</a> 
+                cybersecurity research platform at the Adelaide University.
+            </p>
+            </div>
+
+            <!-- Section 1: Phase 1 -->
+            <h4 class="section-title-alt">Phase 1: Research & Classical ML Baselines</h4>
+            <p>
+              In Phase 1, a consolidated dataset of smart contract source codes was engineered. Simple structural features (e.g., line count, function count) and semantic token frequencies via <strong>TF-IDF</strong> were extracted.
+            </p>
+            <ul>
+              <li><strong>Data Engineering</strong>: Addressed data leakage by stripping raw vulnerability-defining counters (e.g., direct call patterns). Managed class imbalances using <strong>SMOTE</strong> and 5-fold cross-validation.</li>
+              <li><strong>Baseline Model (Random Forest)</strong>: Achieved high recall (82%) on vulnerable contracts, but suffered from low precision (49%), confirming that classical syntactic/lexical ML methods create high false-positive rates.</li>
+              <li><strong>Transformer Validation</strong>: A CodeBERT baseline exhibited similar low-precision trade-offs (Precision: 49.5%, Recall: 65.5%), validating the need for semantic, context-aware LLMs.</li>
+            </ul>
+
+            <!-- Section 2: Phase 2 -->
+            <h4 class="section-title-alt">Phase 2: Prompt Engineering, Knowledge Banks & Fine-Tuned LLM Classifier</h4>
+            <p>
+              Phase 2 explored advanced LLM architectures to eliminate false positives and supply semantic reasoning capabilities:
+            </p>
+            <ol>
+              <li><strong>Prompt-Engineered LLM Loop</strong>: Evaluated multi-tier difficulty prompting without retraining. Demonstrated potential for code reasoning but lacked consistency.</li>
+              <li><strong>Knowledge Bank Augmentation</strong>: Supplied explicit reentrancy signatures (e.g., withdraw-before-state-update patterns) into the prompt context. Improved performance slightly but proved insufficient as a sole detection engine.</li>
+              <li><strong>LLM Classifier Architecture</strong>: Shifted from conversational/instruct models to a direct binary LLM classifier (Base Model + 2-Neuron Classification Head) using <strong>Low-Rank Adaptation (LoRA)</strong> fine-tuning.</li>
+            </ol>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="metric-card" style="background: transparent;">
+                  <h5>Random Forest Baseline (Phase 1)</h5>
+                  <ul>
+                    <li><strong>Accuracy</strong>: 70.25%</li>
+                    <li><strong>F1-Score</strong>: 71.69%</li>
+                    <li><strong>Vulnerable Precision</strong>: 49.0%</li>
+                    <li><strong>Vulnerable Recall</strong>: 82.0%</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="metric-card" style="background: transparent;">
+                  <h5>Fine-Tuned LLM Classifier (Phase 2)</h5>
+                  <ul>
+                    <li><strong>Accuracy</strong>: 91.60%</li>
+                    <li><strong>F1-Score</strong>: 91.50%</li>
+                    <li><strong>Precision (Weighted)</strong>: 91.67%</li>
+                    <li><strong>Recall (Weighted)</strong>: 91.60%</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- UI Showcase Section -->
+            <h4 class="section-title-alt">CyberLab Interface & Visualization Showcase</h4>
+            <p>
+              The integrated tool provides security auditors and developers with a dual-interface pipeline for contract scanning and structural visualization:
+            </p>
+
+            <div class="row style="margin-top: 20px; margin-bottom: 30px;">
+              
+              <!-- Detector UI -->
+              <div class="col-lg-6 col-md-12 text-center" style="margin-bottom: 25px;">
+                <img src="../assets/img/project/detector_ui.png" class="portfolio-featured-image" style="max-width: 100%; border: 1px solid #333;" alt="Smart Contract Detector UI">
+                <p style="color: #cccccc; font-size: 14px; margin-top: 8px; font-style: italic;">
+                  <strong>Figure 1:</strong> Smart Contract Detector UI displaying confidence scores, highlighted vulnerable snippets, and AI-generated explanations.
+                </p>
+              </div>
+
+              <!-- Analyser / Visualizer UI -->
+              <div class="col-lg-6 col-md-12 text-center" style="margin-bottom: 25px;">
+                <img src="../assets/img/project/analyser_ui.png" class="portfolio-featured-image" style="max-width: 100%; border: 1px solid #333;" alt="Smart Contract Analyser Visualizer UI">
+                <p style="color: #cccccc; font-size: 14px; margin-top: 8px; font-style: italic;">
+                  <strong>Figure 2:</strong> Smart Contract Visualizer UI mapping AST control flows, state variables, and execution paths in a flow diagram.
+                </p>
+              </div>
+
+            </div>
+
+            <!-- Section 3: CyberLab & Visualization -->
+            <h4 class="section-title-alt">CyberLab Platform Integration & Smart Contract Visualizer</h4>
+            <p>
+              To transition the project from a research prototype to an enterprise-ready security tool, the engine was integrated into the <strong>CyberLab Platform (Kubernetes/Docker)</strong>:
+            </p>
+            <ul>
+              <li><strong>Automated Deployment</strong>: Automated environment configuration, NVIDIA driver handling, and service spinning using <strong>Ansible Playbooks</strong>.</li>
+              <li><strong>Dynamic S3 Adapter Loading</strong>: Model adapters and tokenizers are dynamically fetched at container startup from AWS S3 buckets.</li>
+              <li><strong>Smart Contract Visualizer</strong>: Added a rule-based AST/Solidity parsing layer that visualizes control flows, state changes, and sensitive external calls alongside detection reports.</li>
+            </ul>
+
+            <br>
+            <h4 style="color:#12d640">System Architecture & UI Pipeline</h4>
+            <div class="video-responsive" style="margin-top: 20px;">
+              <table class="table table-bordered table-striped table-custom" style="color: #ffffff;">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Pipeline Stage</th>
+                    <th>Action</th>
+                    <th>Output / Role</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Stage 1: User Upload</strong></td>
+                    <td>User uploads Solidity source code via CyberLab Web Interface.</td>
+                    <td>Raw <code>.sol</code> file ingest.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Stage 2: Model Scanning</strong></td>
+                    <td>Model Loader queries S3 adapters and executes GPU inference via 2-neuron LLM classifier head.</td>
+                    <td>SAFE / VULNERABLE decision.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Stage 3: Code Localization & Flow</strong></td>
+                    <td>Visualizer parses control flow graphs (CFGs) and highlights exact lines of vulnerable external calls.</td>
+                    <td>Interactive execution path diagram.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Stage 4: LLM Explanation</strong></td>
+                    <td>DeepSeek/CodeLlama generates natural language explanation of the security risk.</td>
+                    <td>Auditor-ready remediation report.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="../assets/vendor/jquery/jquery.min.js"></script>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="../assets/vendor/venobox/venobox.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+</body>
+</html>
