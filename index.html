@@ -38,6 +38,12 @@
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169007209-3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    emailjs.init({
+        publicKey: "nWFj2X0JhGE9lSGbS"
+    });
+  </script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -954,10 +960,107 @@
       <div style="display: flex;justify-content: center;" class="row mt-4">
         <img src="assets/vCard/Ash-Business-Card.jpeg" style="width:300px; height:300px" alt="qr code">
       </div>
+
+      <div class="visitor-counter mt-4">
+          👁️ Visitors: <span id="visitorCount">Loading...</span>
+      </div>
+
+      <div>
+    📍 Visitor location:
+          <span id="visitorLocation">Detecting...</span>
+      </div>
     </div>
   </section>
 
   <!-- End Contact Section -->
+
+  <script>
+    async function trackVisitor() {
+      const baseUrl = "https://api.counterapi.dev/v2/ashweens-team-5279/first-counter-5279";
+      let visitorCount = "N/A";
+
+      // 1. Counter increment & fetch
+      try {
+        const incrementResponse = await fetch(`${baseUrl}/up`);
+        if (incrementResponse.ok) {
+          const counterResponse = await fetch(baseUrl);
+          const counterData = await counterResponse.json();
+          visitorCount = counterData?.data?.up_count ?? "N/A";
+        }
+      } catch (err) {
+        console.warn("Counter API failed (likely offline/blocked):", err);
+      }
+
+      // Display Counter
+      const countEl = document.getElementById("visitorCount");
+      if (countEl) countEl.textContent = visitorCount;
+
+      // 2. Location Fetch with Fallback
+      let locationData = {
+        ip: "127.0.0.1 (Local)",
+        city: "Localhost",
+        region: "Local Development",
+        country_name: "Local Environment"
+      };
+
+      try {
+        const locationResponse = await fetch("https://ipapi.co/json/");
+        if (!locationResponse.ok) {
+          throw new Error(`Location API HTTP error: ${locationResponse.status}`);
+        }
+        const data = await locationResponse.json();
+        // Validate that ipapi returned proper data rather than an error payload
+        if (!data.error) {
+          locationData = data;
+        }
+      } catch (err) {
+        console.warn("Could not fetch location (using fallback):", err);
+      }
+
+      // Display location on page
+      const locEl = document.getElementById("visitorLocation");
+      if (locEl) {
+        locEl.textContent = `${locationData.city || "Unknown"}, ${locationData.country_name || "Unknown"}`;
+      }
+
+      // 3. Send email with resolved location and count
+      await sendVisitorEmail({
+        locationData: locationData,
+        count: visitorCount
+      });
+    }
+
+    async function sendVisitorEmail(visitor) {
+      const templateParams = {
+        email: "ashweenr1998@gmail.com", // Matches the recipient variable in EmailJS
+        recipient: "ashweenr1998@gmail.com",
+        visitor_ip: visitor.locationData?.ip ?? "Unknown",
+        visitor_country: visitor.locationData?.country_name ?? "Unknown",
+        visitor_region: visitor.locationData?.region ?? "Unknown",
+        visitor_city: visitor.locationData?.city ?? "Unknown",
+        visitor_count: visitor.count ?? "Unknown",
+        visit_time: new Date().toLocaleString("en-AU", {
+          timeZone: "Australia/Adelaide"
+        })
+      };
+
+      console.log("Email parameters:", templateParams);
+
+      try {
+        const response = await emailjs.send(
+          "service_1hgpwan",
+          "template_zgcrsqd",
+          templateParams
+        );
+        console.log("Email sent successfully:", response);
+      } catch (error) {
+        console.error("EmailJS error:", error);
+      }
+    }
+
+    trackVisitor();
+  </script>
+  
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/jquery/jquery.min.js"></script>
