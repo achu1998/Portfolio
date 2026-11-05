@@ -1023,11 +1023,13 @@
         locEl.textContent = `${locationData.city || "Unknown"}, ${locationData.country_name || "Unknown"}`;
       }
 
-      // 3. Send email with resolved location and count
-      await sendVisitorEmail({
-        locationData: locationData,
-        count: visitorCount
-      });
+      // 3. Send email only for visitors from Australia
+      if (locationData.country_code === "AU") {
+        await sendVisitorEmail({
+          locationData: locationData,
+          count: visitorCount
+        });
+      }
     }
 
     async function sendVisitorEmail(visitor) {
