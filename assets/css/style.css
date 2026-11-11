@@ -395,6 +395,30 @@ section .container {
   color: #1c7d32;
 }
 
+.about-me .about-contact {
+  list-style: none;
+  padding: 0;
+}
+
+.about-me .about-contact li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 8px;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.about-me .about-contact i {
+  font-size: 20px;
+  color: #12d640;
+  flex-shrink: 0;
+}
+
+.about-me .about-contact a {
+  color: inherit;
+}
+
 .about-me .content p:last-child {
   margin-bottom: 0;
 }
